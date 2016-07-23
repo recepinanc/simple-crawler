@@ -8,6 +8,6 @@ public class CrawlMain {
         Crawler crawler = new Crawler();
         // Test URL
         // Word to Search
-        crawler.search("http://www.testtesttest.com");
+        crawler.search("http://www.testesttest.com");
     }
 }

@@ -5,6 +5,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import java.util.List;
  */
 public class CrawlerLeg {
 
+    private static final CharSequence VALIDATOR = "tofilteryourimages";
     private List<String> pagesToVisitLinks = new LinkedList<String>();
     private Document htmlDocument;
 
@@ -36,10 +38,15 @@ public class CrawlerLeg {
             Elements linksOnPage = htmlDocument.select("img[src]");
             System.out.println("Found (" + linksOnPage.size() + ") images");
 
+            PrintWriter writer = new PrintWriter("links.txt", "UTF-8");
             for (Element link : linksOnPage) {
                 pagesToVisitLinks.add(link.absUrl("src"));
-                System.out.println(String.format("Link : %s", link.attributes().get("src")));
+                if (link.attributes().get("src").contains(VALIDATOR)) {
+                    writer.write(link.attributes().get("src") + "\n");
+                    System.out.println(String.format("Link : %s", link.attributes().get("src")));
+                }
             }
+            writer.close();
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("Error in out HTTP request " + e);
