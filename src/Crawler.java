@@ -30,7 +30,7 @@ public class Crawler {
         return nextUrl;
     }
 
-    public void search(String url, String searchWord) {
+    public void search(String url) {
         while (pagesVisited.size() < MAX_PAGES_TO_SEARCH) {
             String currentUrl;
             CrawlerLeg leg = new CrawlerLeg();
@@ -43,13 +43,6 @@ public class Crawler {
             }
 
             leg.crawl(currentUrl);
-
-            boolean isFound = leg.doesContainWord(searchWord);
-            if (isFound) {
-                System.out.println(String.format("**Success** Word %s found at %s", searchWord, currentUrl));
-                break;
-            }
-
             pagesToVisit.addAll(leg.getLinks());
         }
         System.out.println(String.format("**Done** Visited %s web page(s)", this.pagesVisited.size()));

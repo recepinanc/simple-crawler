@@ -6,9 +6,8 @@ public class CrawlMain {
     public static void main(String[] args)
     {
         Crawler crawler = new Crawler();
-
         // Test URL
         // Word to Search
-        crawler.search("http://testurl-testurl.com/", "searchword");
+        crawler.search("http://www.testtesttest.com");
     }
 }

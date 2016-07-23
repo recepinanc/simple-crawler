@@ -33,12 +33,12 @@ public class CrawlerLeg {
 
             System.out.println("Received web page at " + url);
 
-            Elements linksOnPage = htmlDocument.select("a[href]");
-            System.out.println("Found (" + linksOnPage.size() + ") links");
+            Elements linksOnPage = htmlDocument.select("img[src]");
+            System.out.println("Found (" + linksOnPage.size() + ") images");
 
             for (Element link : linksOnPage) {
-                pagesToVisitLinks.add(link.absUrl("href"));
-                System.out.println(String.format("Link : %s", link.toString()));
+                pagesToVisitLinks.add(link.absUrl("src"));
+                System.out.println(String.format("Link : %s", link.attributes().get("src")));
             }
         } catch (IOException e) {
             e.printStackTrace();
